@@ -13,8 +13,8 @@
  */
 int State::evaluate(){ // white value - black value
   // [TODO] design your own evaluation function
-  this->game_state = NONE;
-  std::vector<Move> all_actions;
+  // this->game_state = NONE;
+  // std::vector<Move> all_actions;
   auto white_board = this->board.board[0]; //white
   auto black_board = this->board.board[1]; //black
   int white_piece, black_piece;
@@ -32,27 +32,27 @@ int State::evaluate(){ // white value - black value
               break;
 
           case 2: //rook, 6
-            self_value += 2;
+            self_value += 8;
             break;
 
           case 3: //knight
-              self_value += 2;
+              self_value += 7;
               break;
 
           case 4: //bishop, 8
-              self_value += 2;
+              self_value += 7;
               break;
 
           case 5: //queen, 20
-            self_value += 2;
+            self_value += 20;
             break;
 
           case 6: //king
-            self_value += 2;
+            self_value += 1000;
             break;
         }
       }
-      else if((black_piece)){
+      if((black_piece)){
         // std::cout << this->player << "," << now_piece << ' ';
         switch (black_piece){
           case 1: //pawn , 2
@@ -60,23 +60,23 @@ int State::evaluate(){ // white value - black value
               break;
 
           case 2: //rook, 6
-            self_value -= 2;
+            self_value -= 8;
             break;
 
           case 3: //knight
-              self_value -= 2;
+              self_value -= 7;
               break;
 
           case 4: //bishop, 8
-              self_value -= 2;
+              self_value -= 7;
               break;
 
           case 5: //queen, 20
-            self_value -= 2;
+            self_value -= 20;
             break;
 
           case 6: //king
-            self_value -= 2;
+            self_value -= 1000;
             break;
         }
       }
@@ -275,7 +275,7 @@ void State::get_legal_actions(){
       }
     }
   }
-  std::cout << "\n";
+  //std::cout << "\n";
   this->legal_actions = all_actions;
 }
 
