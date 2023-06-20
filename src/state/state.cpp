@@ -11,68 +11,79 @@
  * 
  * @return int 
  */
-int State::evaluate(){
+int State::evaluate(){ // white value - black value
   // [TODO] design your own evaluation function
   this->game_state = NONE;
   std::vector<Move> all_actions;
-  auto self_board = this->board.board[this->player];
-  auto oppn_board = this->board.board[1 - this->player];
-  int now_piece, oppn_piece;
-  int self_value = 0, oppn_value = 0;
+  auto white_board = this->board.board[0]; //white
+  auto black_board = this->board.board[1]; //black
+  int white_piece, black_piece;
+  int self_value = 0;
 
   for(int i=0; i<BOARD_H; i+=1){
     for(int j=0; j<BOARD_W; j+=1){
-      if((now_piece=self_board[i][j])){
+      white_piece=white_board[i][j];
+      black_piece=black_board[i][j];
+      if((white_piece)){
         // std::cout << this->player << "," << now_piece << ' ';
-        switch (now_piece){
+        switch (white_piece){
           case 1: //pawn , 2
-            if(this->player ){
-              //black
               self_value += 2;
-            }
-            break;
-          
+              break;
+
           case 2: //rook, 6
-            if(this->player ){
-              //black
-              self_value += 2;
-            }
+            self_value += 2;
             break;
 
           case 3: //knight
-            if(this->player ){
-              //black
               self_value += 2;
-            }
-            break;
+              break;
 
           case 4: //bishop, 8
-            if(this->player ){
-                //black
-                self_value += 2;
-            }
-            break;
+              self_value += 2;
+              break;
 
           case 5: //queen, 20
-            if(this->player ){
-              //black
-              self_value += 2;
-            }
+            self_value += 2;
             break;
 
           case 6: //king
-            if(this->player ){
-              //black
-              self_value += 2;
-            }
+            self_value += 2;
+            break;
+        }
+      }
+      else if((black_piece)){
+        // std::cout << this->player << "," << now_piece << ' ';
+        switch (black_piece){
+          case 1: //pawn , 2
+              self_value -= 2;
+              break;
+
+          case 2: //rook, 6
+            self_value -= 2;
+            break;
+
+          case 3: //knight
+              self_value -= 2;
+              break;
+
+          case 4: //bishop, 8
+              self_value -= 2;
+              break;
+
+          case 5: //queen, 20
+            self_value -= 2;
+            break;
+
+          case 6: //king
+            self_value -= 2;
             break;
         }
       }
     }
   }
-  return 0;
+  return self_value ; // white value - black value
 }
-
 
 /**
  * @brief return next state after the move
